@@ -178,18 +178,18 @@ ORDER BY Total_views DESC;
 
 /*
 Black content correlation:
-✅ High Black viewership + Channel O, Trace TV, MK, Africa Magic dominating = data is consistent and valid!
+-->High Black viewership + Channel O, Trace TV, MK, Africa Magic dominating = data is consistent and valid!
 Female viewership theory busted:
-✅ E! Entertainment and Vuzu (female targeted) have LOW views = females are likely NOT using partners accounts after all!
- Your earlier theory was self-corrected with data! That's incredible! 💪
+--> E! Entertainment and Vuzu (female targeted) have LOW views = females are likely NOT using partners accounts after all!
+ Your earlier theory was self-corrected with data 
 Low E! and Vuzu viewership doesn't mean females aren't watching
 It could mean females who DO watch prefer other content not traditionally labelled as "female"
 Maybe female viewers are watching sports, music or news too!
 
 Senior Citizens:
-✅ CNN viewership could represent the small senior citizen audience — news content appeals to older demographics!
+--> CNN viewership could represent the small senior citizen audience — news content appeals to older demographics!
 M-Net:
-✅ Low movie/general entertainment interest among BrightTV audience
+--> Low movie/general entertainment interest among BrightTV audience
 
 */
 
@@ -545,7 +545,8 @@ with significantly lower 'Clicked and Left' rates. This suggests ICC Cricket vie
 
 
 
---=====================================SKELETON QUERY=========================================================
+--=====================================Anaysis QUERY: =========================================================
+
 
 SELECT 
 --WHO
@@ -567,10 +568,10 @@ v.Channel As Channel,
  DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'MMMM') AS Month_Name,
  DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE') AS Day_Of_Week,
  CASE 
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  12 AND 17 THEN 'Early_To_Late_Afternoon'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  18 AND 20 THEN 'Early_to_Late_Evening'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afernoon_to_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
  ELSE 'Night'
  END AS Daily_Hours,
 
@@ -616,10 +617,10 @@ WHEN u.Age BETWEEN 36 AND 64 THEN 'Middle Aged'
 ELSE 'Senior Citizen'
 END,
 CASE 
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  12 AND 17 THEN 'Early_To_Late_Afternoon'
- WHEN HOUR(DATEADD(hour, 2, RecordDate)) BETWEEN  18 AND 20 THEN 'Early_to_Late_Evening'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afernoon_to_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
  ELSE 'Night'
  END, 
 CASE 
@@ -629,7 +630,5 @@ WHEN MINUTE(v.Duration) >= 1 AND HOUR(v.Duration) = 0 THEN 'Casual Commitment'
 WHEN HOUR(v.Duration) BETWEEN 1 AND 4 THEN 'Valid Commitment'
 ELSE 'Solid Commitment'
 END;
-
-
 
 
