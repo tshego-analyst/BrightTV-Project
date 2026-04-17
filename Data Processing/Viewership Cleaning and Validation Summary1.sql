@@ -15,8 +15,9 @@ Zero duration — this tells us impression vs actual views
 
 */
 
-/* Since the userid4 is now dropped, the code is now hvaing an error, 
-so I am commenting this blocke code  out
+/*
+Since the userid4 is now dropped, the code is now having an error, 
+so I am commenting this block code  out
 
 --See how many rows have a mismatch
 SELECT UserID, userid4
