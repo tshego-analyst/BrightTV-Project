@@ -565,13 +565,23 @@ v.Channel As Channel,
 
 --WHEN
  --DATEADD(hour, 2, v.RecordDate) AS Record_Date, 
+ MONTH(DATEADD(hour, 2, v.RecordDate)) AS Month_Number,
  DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'MMMM') AS Month_Name,
- DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE') AS Day_Of_Week,
+ CASE DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE')
+    WHEN 'Monday' THEN 1
+    WHEN 'Tuesday' THEN 2
+    WHEN 'Wednesday' THEN 3
+    WHEN 'Thursday' THEN 4
+    WHEN 'Friday' THEN 5
+    WHEN 'Saturday' THEN 6
+    WHEN 'Sunday' THEN 7
+END AS Day_Number,
+ DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE') AS Day_Name,
  CASE 
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_to_Late_Afternoon'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_To_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_To_Late_Evening'
  ELSE 'Night'
  END AS Daily_Hours,
 
@@ -608,7 +618,9 @@ GROUP BY
  Province,
  Channel,
  Month_Name,
- Day_Of_Week, 
+ Day_Name, 
+ Day_Number,
+ Month_Number, 
 CASE --My age rage is between 13 and 90
 WHEN u.Age IS NULL THEN 'Invalid Age'
 WHEN u.Age BETWEEN 13 AND 19 THEN 'Teenagers'
@@ -619,8 +631,8 @@ END,
 CASE 
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_to_Late_Afternoon'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_To_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_To_Late_Evening'
  ELSE 'Night'
  END, 
 CASE 
@@ -629,6 +641,15 @@ WHEN SECOND(v.Duration) BETWEEN 3 AND 60 AND (HOUR(v.Duration) =0 AND MINUTE(v.D
 WHEN MINUTE(v.Duration) >= 1 AND HOUR(v.Duration) = 0 THEN 'Casual Commitment'
 WHEN HOUR(v.Duration) BETWEEN 1 AND 4 THEN 'Valid Commitment'
 ELSE 'Solid Commitment'
+END, 
+CASE DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE')
+    WHEN 'Monday' THEN 1
+    WHEN 'Tuesday' THEN 2
+    WHEN 'Wednesday' THEN 3
+    WHEN 'Thursday' THEN 4
+    WHEN 'Friday' THEN 5
+    WHEN 'Saturday' THEN 6
+    WHEN 'Sunday' THEN 7
 END;
 
 
