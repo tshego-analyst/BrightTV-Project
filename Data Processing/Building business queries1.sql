@@ -570,7 +570,7 @@ v.Channel As Channel,
  CASE 
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afernoon_to_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_to_Late_Afternoon'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
  ELSE 'Night'
  END AS Daily_Hours,
@@ -619,7 +619,7 @@ END,
 CASE 
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  6 AND 11 THEN 'Morning_To_Late_Morning'
- WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afernoon_to_Late_Afternoon'
+ WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  12 AND 17 THEN 'Early_Afternoon_to_Late_Afternoon'
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  18 AND 20 THEN 'Early_Evening_to_Late_Evening'
  ELSE 'Night'
  END, 
