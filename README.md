@@ -94,7 +94,7 @@ The following cleaning decisions were made and documented before writing any SQL
 - Built one combined big SELECT query for the final clean export
 - Applied CASE statements for Age Group, Viewership Engagement, and Daily Hours
 - Used DATEADD to convert UTC timestamps to South African Standard Time (SAST)
--SQL Join Decision:
+- SQL Join Decision:
 
 A **LEFT JOIN** was used to combine the Viewership and UserProfile tables on `UserID`.
 
