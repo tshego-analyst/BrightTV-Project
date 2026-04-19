@@ -71,17 +71,35 @@ In a real-world scenario, the right step would be to go back to the data source 
 - Defined data cleaning rules (age boundaries 13–90, time zone correction +2hrs SAST, engagement category thresholds)
 - Planned all pivot tables before writing the big query
 
-### Phase 3 — SQL Transformation
+### Phase 3 — Data Cleaning & Standardisation
+
+The following cleaning decisions were made and documented before writing any SQL:
+
+**User Profiles Table:**
+- Replaced space characters (`" "`) in Gender, Race, Province and Social Media Handle with true nulls — Excel and SQL treat spaces as valid values which would create phantom categories in analysis
+- Replaced invalid ages (below 13 and above 90) with null — users must be of a registerable age; ages like 0 and 114 are not realistic for a platform user
+- Standardised Gender values to consistent casing (Male, Female, Not Specified)
+- Standardised Race values to consistent casing and formatting (e.g. `indian_asian` → `Indian Asian`)
+
+**Viewership Table:**
+- Retained "Break in Transmission" records (63 events) — these represent broadcast signal failures. Rather than dropping them, they were kept intentionally to analyse whether transmission breaks happen on specific channels, at specific times, and to quantify how many viewers were lost due to signal failure
+- Retained records with 0 seconds viewing duration — rather than dropping these, they were kept and classified under the Viewership Engagement framework as "Clicked and Left" (0–2 seconds), providing insight into how many viewers opened content but immediately disengaged
+- Resolved the duplicate UserID columns (`UserID` vs `userid`) — 485 rows had mismatched values between the two columns and were dropped for data integrity (see Dataset section above)
+- Applied +2 hour DATEADD correction to convert UTC timestamps to South African Standard Time (SAST)
+
+**Final clean record count: 9,515 rows**
+
+### Phase 4 — SQL Transformation
 - Wrote individual small queries to validate each metric
 - Built one combined big SELECT query for the final clean export
 - Applied CASE statements for Age Group, Viewership Engagement, and Daily Hours
 - Used DATEADD to convert UTC timestamps to South African Standard Time (SAST)
 
-### Phase 4 — Excel Analysis
+### Phase 5 — Excel Analysis
 - Built 11 pivot tables covering all 5 W's
 - Verified all Grand Totals against SQL mini queries (9,515)
 
-### Phase 5 — Dashboard & Presentation
+### Phase 6 — Dashboard & Presentation
 - Built interactive dashboard in Looker Studio
 - Created 12-slide CEO-level PowerPoint presentation with insights and recommendations
 
