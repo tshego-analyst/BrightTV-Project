@@ -565,17 +565,7 @@ v.Channel As Channel,
 
 --WHEN
  --DATEADD(hour, 2, v.RecordDate) AS Record_Date, 
- MONTH(DATEADD(hour, 2, v.RecordDate)) AS Month_Number,
  DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'MMMM') AS Month_Name,
- CASE DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE')
-    WHEN 'Monday' THEN 1
-    WHEN 'Tuesday' THEN 2
-    WHEN 'Wednesday' THEN 3
-    WHEN 'Thursday' THEN 4
-    WHEN 'Friday' THEN 5
-    WHEN 'Saturday' THEN 6
-    WHEN 'Sunday' THEN 7
-END AS Day_Number,
  DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE') AS Day_Name,
  CASE 
  WHEN HOUR(DATEADD(hour, 2, v.RecordDate)) BETWEEN  0 AND 5 THEN 'Midnight_To_Early_Morning'
@@ -619,8 +609,6 @@ GROUP BY
  Channel,
  Month_Name,
  Day_Name, 
- Day_Number,
- Month_Number, 
 CASE --My age rage is between 13 and 90
 WHEN u.Age IS NULL THEN 'Invalid Age'
 WHEN u.Age BETWEEN 13 AND 19 THEN 'Teenagers'
@@ -641,15 +629,6 @@ WHEN SECOND(v.Duration) BETWEEN 3 AND 60 AND (HOUR(v.Duration) =0 AND MINUTE(v.D
 WHEN MINUTE(v.Duration) >= 1 AND HOUR(v.Duration) = 0 THEN 'Casual Commitment'
 WHEN HOUR(v.Duration) BETWEEN 1 AND 4 THEN 'Valid Commitment'
 ELSE 'Solid Commitment'
-END, 
-CASE DATE_FORMAT(DATEADD(hour, 2, v.RecordDate), 'EEEE')
-    WHEN 'Monday' THEN 1
-    WHEN 'Tuesday' THEN 2
-    WHEN 'Wednesday' THEN 3
-    WHEN 'Thursday' THEN 4
-    WHEN 'Friday' THEN 5
-    WHEN 'Saturday' THEN 6
-    WHEN 'Sunday' THEN 7
 END;
 
 
