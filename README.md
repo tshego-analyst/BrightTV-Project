@@ -94,8 +94,6 @@ The following cleaning decisions were made and documented before writing any SQL
 - Built one combined big SELECT query for the final clean export
 - Applied CASE statements for Age Group, Viewership Engagement, and Daily Hours
 - Used DATEADD to convert UTC timestamps to South African Standard Time (SAST)
-- Added Month_Number and Day_Number columns for correct chronological sorting
-
 
 ### Phase 5 — Excel Analysis
 - Built 11 pivot tables covering all 5 W's
