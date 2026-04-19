@@ -87,7 +87,7 @@ The following cleaning decisions were made and documented before writing any SQL
 - Resolved the duplicate UserID columns (`UserID` vs `userid`) — 485 rows had mismatched values between the two columns and were dropped for data integrity (see Dataset section above)
 - Applied +2 hour DATEADD correction to convert UTC timestamps to South African Standard Time (SAST)
 
-**Final clean record count: 9,515 rows ✅**
+**Final clean record count: 9,515 rows**
 
 ### Phase 4 — SQL Transformation
 - Wrote individual small queries to validate each metric
