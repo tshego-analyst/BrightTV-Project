@@ -27,7 +27,7 @@ Using a **5 W's framework**, the analysis answered the following:
 Two raw tables were provided:
 
 - **UserProfile** — demographic data (Race, Gender, Age, Province)
-- **Viewership** — viewing events (Channel, Duration, RecordDate, UserID)
+- **Viewership** — viewing events (Channel, Duration, RecordDate, UserID, userid)
 
 **Raw records:** 10,000 viewership events
 **After cleaning and joining:** 9,515 valid records (485 records removed due to mismatched UserIDs)
