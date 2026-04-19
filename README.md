@@ -94,6 +94,13 @@ The following cleaning decisions were made and documented before writing any SQL
 - Built one combined big SELECT query for the final clean export
 - Applied CASE statements for Age Group, Viewership Engagement, and Daily Hours
 - Used DATEADD to convert UTC timestamps to South African Standard Time (SAST)
+-SQL Join Decision:
+
+A **LEFT JOIN** was used to combine the Viewership and UserProfile tables on `UserID`.
+
+The Viewership table was the **left (primary) table** because the focus of this analysis was on viewership events, not on the users themselves. Using a LEFT JOIN ensures that **all 9,515 viewing events are retained** in the results — even if a viewing record has no matching user profile. User demographics (Race, Gender, Age, Province) are brought in where they match, and appear as NULL where they don't.
+
+An INNER JOIN was deliberately avoided because it would have excluded any viewing events without a matching user profile, potentially losing valid viewership data. The business priority was to account for every view first, then enrich with demographics where possible.
 
 ### Phase 5 — Excel Analysis
 - Built 11 pivot tables covering all 5 W's
